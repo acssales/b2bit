@@ -7,6 +7,7 @@ from .models import Tweet, User
 import jwt
 import datetime
 
+
 class RegisterView(APIView):
 
     def post(self, request):
@@ -14,6 +15,7 @@ class RegisterView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+
 
 class LoginView(APIView):
 
@@ -46,23 +48,15 @@ class LoginView(APIView):
 
         return response
 
+
 class UserView(APIView):
 
     def get(self, request):
-        token = request.COOKIES.get('jwt')
-
-        if not token:
-            raise AuthenticationFailed('Não autenticado!')
-
-        try:
-            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
-        except jwt.ExpiredSignatureError:
-            raise AuthenticationFailed('Não autenticado!')
-
-        user = User.objects.get(pk=payload['id'])
+        user = User.objects.get_current_user(request)
         serializer = UserSerializer(user)
 
         return Response(serializer.data)
+
 
 class LogoutView(APIView):
 
@@ -74,25 +68,26 @@ class LogoutView(APIView):
         }
         return response
 
+
 class TweetViewSet(viewsets.ModelViewSet):
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
     user = serializers.PrimaryKeyRelatedField(
-        # set it to read_only as we're handling the writing part ourselves
+        # Deixar como read_only pois o autor é definido pelo back-end
         read_only=True,
     )
 
     def perform_create(self, serializer):
-        # serializer.save(user=self.request.user)
-        token = self.request.COOKIES.get('jwt')
-
-        if not token:
-            raise AuthenticationFailed('Não autenticado!')
-
-        try:
-            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
-        except jwt.ExpiredSignatureError:
-            raise AuthenticationFailed('Não autenticado!')
-
-        author = User.objects.get(pk=payload['id'])
+        # Identifica o autor do tweet automaticamente
+        author = User.objects.get_current_user(self.request)
         serializer.save(user=author)
+
+
+class GeneralFeedViewSet(viewsets.ViewSet):
+
+    def list(self, request):
+        # 10 tweets mais recentes
+        # Regra de negocio: o autor não vê os próprios tweets no feed
+        feed = Tweet.objects.exclude(user=User.objects.get_current_user(request)).order_by('-pub_date')[:10]
+        serializer = TweetSerializer(feed, many=True)
+        return Response(serializer.data)
