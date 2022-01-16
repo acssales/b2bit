@@ -19,4 +19,4 @@ class Tweet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)   # Autor do tweet
     tweet_text = models.CharField(max_length=280)    # Sim, desde 2017 os tweets passaram de 140 para 280 caracteres...
     likes = models.IntegerField(default=0)           # Quantidade de "coracoes" recebidos
-    pub_date = models.DateField(default=now)  # Data de publicacao
+    pub_date = models.DateTimeField(default=now)  # Data de publicacao

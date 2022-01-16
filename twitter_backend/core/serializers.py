@@ -24,3 +24,7 @@ class TweetSerializer(serializers.ModelSerializer):
     class Meta:
         model=Tweet
         fields = ['id', 'user', 'tweet_text', 'likes', 'pub_date']
+        extra_kwargs = {
+            # Permite que o front-end veja o dono do tweet, sem precisar informá-lo ao publicar
+            'user': {'required': False, 'allow_null': True}
+        }
