@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import RegisterView, LoginView, UserView, LogoutView
-from .views import TweetViewSet, GeneralFeedViewSet
+from .views import FollowingViewSet, RegisterView, LoginView, UserView, LogoutView
+from .views import TweetViewSet, GeneralFeedViewSet, SelectedFeedViewSet, FollowingViewSet
 
 urlpatterns = [
     path('register/', RegisterView.as_view()),
@@ -9,5 +9,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view()),
 
     path('user/tweet/', TweetViewSet.as_view({'post': 'create', 'get': 'list'})),
-    path('user/feed_geral/', GeneralFeedViewSet.as_view({'get': 'list'}))
+    path('user/feed_geral/', GeneralFeedViewSet.as_view({'get': 'list'})),
+    path('user/feed_selecionado/', SelectedFeedViewSet.as_view({'get': 'list'})),
+    path('user/follow/', FollowingViewSet.as_view({'post': 'create'}))
 ]

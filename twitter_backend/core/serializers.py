@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Tweet
+from .models import Following, User, Tweet
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -22,9 +22,20 @@ class UserSerializer(serializers.ModelSerializer):
 
 class TweetSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Tweet
+        model = Tweet
         fields = ['id', 'user', 'tweet_text', 'likes', 'pub_date']
         extra_kwargs = {
             # Permite que o front-end veja o dono do tweet, sem precisar informá-lo ao publicar
+            'user': {'required': False, 'allow_null': True},
+            # Permite que a data não seja informada
+            'pub_date': {'required': False, 'allow_null': True}
+        }
+
+class FollowingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Following
+        fields = ['id', 'user','following_user']
+        extra_kwargs = {
+            # Usuário não deve ser informado, será identificado automaticamente
             'user': {'required': False, 'allow_null': True}
         }

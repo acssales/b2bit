@@ -1,6 +1,6 @@
 from django.db import models
+from django.db.models import Q, F
 from django.contrib.auth.models import AbstractUser
-from django.utils.timezone import now
 from rest_framework.exceptions import AuthenticationFailed
 import jwt
 
@@ -38,4 +38,19 @@ class Tweet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)   # Autor do tweet
     tweet_text = models.CharField(max_length=280)    # Sim, desde 2017 os tweets passaram de 140 para 280 caracteres...
     likes = models.IntegerField(default=0)           # Quantidade de "coracoes" recebidos
-    pub_date = models.DateTimeField(default=now)  # Data de publicacao
+    pub_date = models.DateTimeField(auto_now_add=True)     # Data de publicacao
+    class Meta:
+        ordering = ["-pub_date"]
+
+
+class Following(models.Model):
+    user = models.ForeignKey(User, related_name="following", on_delete=models.CASCADE)          # Seguidor
+    following_user = models.ForeignKey(User, related_name="followed", on_delete=models.CASCADE) # Usuário sendo seguido
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user','following_user'],  name="unique_followers"), # Só há um registro de cada par (seguidor, seguido)
+            models.CheckConstraint(check=~Q(user=F('following_user')), name="cant_follow_yourself") # Um usuário não pode seguir a si mesmo
+        ]
+
+    def __str__(self):
+        return f"{self.user} follows {self.following_user}"

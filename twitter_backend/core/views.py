@@ -2,8 +2,8 @@ from rest_framework import viewsets, serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
-from .serializers import TweetSerializer, UserSerializer
-from .models import Tweet, User
+from .serializers import FollowingSerializer, TweetSerializer, UserSerializer
+from .models import Tweet, User, Following
 import jwt
 import datetime
 
@@ -33,7 +33,7 @@ class LoginView(APIView):
 
         payload = {
             'id': user.id,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=180),
             'iat': datetime.datetime.utcnow()
         }
 
@@ -72,15 +72,20 @@ class LogoutView(APIView):
 class TweetViewSet(viewsets.ModelViewSet):
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
-    user = serializers.PrimaryKeyRelatedField(
-        # Deixar como read_only pois o autor é definido pelo back-end
-        read_only=True,
-    )
+    user = UserSerializer(many=True, read_only=True)
 
     def perform_create(self, serializer):
         # Identifica o autor do tweet automaticamente
         author = User.objects.get_current_user(self.request)
         serializer.save(user=author)
+
+class FollowingViewSet(viewsets.ModelViewSet):
+    serializer_class = FollowingSerializer
+
+    def perform_create(self, serializer):
+        # Identifica o autor do tweet automaticamente
+        follower = User.objects.get_current_user(self.request)
+        serializer.save(user=follower)
 
 
 class GeneralFeedViewSet(viewsets.ViewSet):
@@ -89,5 +94,19 @@ class GeneralFeedViewSet(viewsets.ViewSet):
         # 10 tweets mais recentes
         # Regra de negocio: o autor não vê os próprios tweets no feed
         feed = Tweet.objects.exclude(user=User.objects.get_current_user(request)).order_by('-pub_date')[:10]
+        serializer = TweetSerializer(feed, many=True)
+        return Response(serializer.data)
+
+
+class SelectedFeedViewSet(viewsets.ViewSet):
+    def list(self, request):
+        # 10 tweets mais recentes
+        # Regra de negocio: o autor não vê os próprios tweets no feed
+        following_obj = Following.objects.filter(user=User.objects.get_current_user(request)) # Encontra a lista de usuários seguidos pelo usuário logado
+        if following_obj.exists():
+            following = [f.following_user for f in following_obj]
+            feed = Tweet.objects.filter(user__in=following).order_by('-pub_date')[:10] # Somente funciona se o usuário segue alguém
+        else:
+            feed = Tweet.objects.none() # Caso o usuário não siga ninguém, retorna uma lista vazia
         serializer = TweetSerializer(feed, many=True)
         return Response(serializer.data)
