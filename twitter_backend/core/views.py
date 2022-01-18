@@ -87,7 +87,6 @@ class FollowingViewSet(viewsets.ModelViewSet):
         follower = User.objects.get_current_user(self.request)
         serializer.save(user=follower)
 
-
 class GeneralFeedViewSet(viewsets.ViewSet):
 
     def list(self, request):
