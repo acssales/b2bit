@@ -21,28 +21,28 @@ Obs: No feed, um usuário não deverá ver os próprios tweets
 
 CASO 1: Cadastro de usuário
 
-	O ator faz o cadastro no sistema através da API. Como usuário, ele deve poder fazer o cadastro, para que ele tenha acesso ao Login. Use os campos que achar necessário para a definição do modelo do usuário.
+> O ator faz o cadastro no sistema através da API. Como usuário, ele deve poder fazer o cadastro, para que ele tenha acesso ao Login. Use os campos que achar necessário para a definição do modelo do usuário.
 
 
 CASO 2: Autenticação (Login)
 
-	O ator deve ser autenticado no sistema através de um Token. Como usuário, ele deve poder fazer login, para que ele tenha acesso ao sistema. Este token deve ter uma data de expiração.
+> O ator deve ser autenticado no sistema através de um Token. Como usuário, ele deve poder fazer login, para que ele tenha acesso ao sistema. Este token deve ter uma data de expiração.
 
 
 CASO 3: Fazer uma publicação
 
-	O ator cria um post. Esta publicação é persistida no sistema. Como usuário, ele deve poder criar uma publicação, para que possa ser vista por outros usuários do sistema.
+> O ator cria um post. Esta publicação é persistida no sistema. Como usuário, ele deve poder criar uma publicação, para que possa ser vista por outros usuários do sistema.
 
 
 CASO 4: Feed geral
 
-    O ator deve receber, no formato JSON, o feed dos últimos 10 posts.
+> O ator deve receber, no formato JSON, o feed dos últimos 10 posts.
 
 
 CASO 5: Feed personalizado
 
-    Como usuário, ele deve ter um feed com apenas as publicações de usuários selecionados, para que ele possa ter mais controle do seu feed.
-    Este caso de uso é semelhante a uma funcionalidade de feed de pessoas que você segue.
+> Como usuário, ele deve ter um feed com apenas as publicações de usuários selecionados, para que ele possa ter mais controle do seu feed.
+Este caso de uso é semelhante a uma funcionalidade de feed de pessoas que você segue.
 
 ### Requisitos extras
 
