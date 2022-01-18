@@ -10,11 +10,11 @@ Utilizar, preferencialmente, Django REST Framework, e banco de dados preferencia
 
 ### Requisitos obrigatórios (Casos de Uso)
 
-1. [REALIZADO] Caso de Uso 1: Cadastro de usuário
-2. [REALIZADO] Caso de Uso 2: Login
-3. [REALIZADO] Caso de Uso 3: Publicação de Tweet
-4. [REALIZADO] Caso de Uso 4: Feed Geral (10 tweets mais recentes)
-5. [REALIZADO] Caso de Uso 5: Feed Personalizado
+1. [REALIZADO] Cadastro de usuário
+2. [REALIZADO] Login
+3. [REALIZADO] Publicação de Tweet
+4. [REALIZADO] Feed Geral (10 tweets mais recentes)
+5. [REALIZADO] Feed Personalizado
 Obs: No feed, um usuário não deverá ver os próprios tweets
 
 CASO 1: Cadastro de usuário
@@ -43,26 +43,28 @@ CASO 5: Feed personalizado
     Este caso de uso é semelhante a uma funcionalidade de feed de pessoas que você segue.
 
 ### Requisitos extras
-* Deploy
-* Diagrama entidade relacional do banco de dados utilizado no projeto
-* Testes automatizados
-* Deploy do projeto (colocar em produção)
-* Upload de arquivos estáticos
-* Servir arquivos estáticos. Preferencialmente por uma CDN. Indicamos o AWS S3
-* [REALIZADO] Utilizar banco de dados PostgreSQL
+* [ ] Deploy
+* [ ] Diagrama entidade relacional do banco de dados utilizado no projeto
+* [ ] Testes automatizados
+* [ ] Deploy do projeto (colocar em produção)
+* [ ] Upload de arquivos estáticos
+* [ ] Servir arquivos estáticos. Preferencialmente por uma CDN. Indicamos o AWS S3
+* [x] Utilizar banco de dados PostgreSQL[^1]
 
 ### Itens Bonus (não solicitados)
-* Logout
-* Controle de prazo (semelhante a SCRUM). Ver em: https://docs.google.com/spreadsheets/d/1ZX-whGO1GHcfIXg0e_f0SX-F4tacGiGRgmj4L2YbIGI/edit?usp=sharing
+* [X] Logout
+* [X] Controle de prazo (semelhante a SCRUM). Ver em: https://docs.google.com/spreadsheets/d/1ZX-whGO1GHcfIXg0e_f0SX-F4tacGiGRgmj4L2YbIGI/edit?usp=sharing
 
 ## Tabela de versões dos recursos utilizados
 
-       Recurso        | Versão
-----------------------|----------
-Python                | 3.8.10
-Django                | 4.0.1
-Django REST framework | 3.13.1
-Tokens(JWT)           | pyJWT-2.3.0
-CORS                  | django-cors-headers-3.11.0
-Conexão Postgres      | psycopg2-binary-2.9.3
-postman (para testes) | (v9/stable) 9.8.3
+|       Recurso        |           Versão           |
+|----------------------|----------------------------|
+|Python                | 3.8.10                     |
+|Django                | 4.0.1                      |
+|Django REST framework | 3.13.1                     |
+|Tokens(JWT)           | pyJWT-2.3.0                |
+|CORS                  | django-cors-headers-3.11.0 |
+|Conexão Postgres      | psycopg2-binary-2.9.3      |
+|postman (para testes) | (v9/stable) 9.8.3          |
+
+[^1] Foi utilizado também o sqlite3 durante parte do desenvolvimento, antes da mudança para um psql local e finalmente, o psql utilizado no deploy.
