@@ -1,1 +1,1 @@
-web: gunicorn twitter_backend/wsgi:app
+web: gunicorn twitter_backend.wsgi
