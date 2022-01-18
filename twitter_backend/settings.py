@@ -78,13 +78,13 @@ WSGI_APPLICATION = 'twitter_backend.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'b2bit',
-        'USER': 'asales'
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'b2bit',
+#        'USER': 'asales'
+#    }
+#}
 
 DATABASES = {
     'default': {
