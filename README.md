@@ -79,8 +79,9 @@ CASO 5: Feed personalizado
 # Forma de utilização
 
 1. Criação de usuário
-Vá para: https://b2bit.herokuapp.com/api/register/
-Envie um JSON via POST no formato:
+- Vá para: https://b2bit.herokuapp.com/api/register/
+- Envie um JSON via POST no formato:
+```
 {
     "nickname": "Seu Nome",
     "atname": "@seu_nome",
@@ -88,39 +89,46 @@ Envie um JSON via POST no formato:
     "email": "seu_email@provedor.com",
     "password": "sua senha"
 }
+```
 
 2. Login
-Vá para: https://b2bit.herokuapp.com/api/login/
-Envie um JSON via POST no formato:
+- Vá para: https://b2bit.herokuapp.com/api/login/
+- Envie um JSON via POST no formato:
+```
 {
     "atname": "@seu_nome",
     "password": "sua senha"
 }
+```
 
 3. Ver seu perfil
-Vá para: https://b2bit.herokuapp.com/api/user/
-Envie um GET sem parametros
+- Vá para: https://b2bit.herokuapp.com/api/user/
+- Envie um GET sem parametros
 
 3. Logout
 
 4. Tuitar
-Vá para:
-Envie um JSON via POST no formato:
+- Vá para:
+- Envie um JSON via POST no formato:
+```
 {
     "tweet_text": "texto do seu tweet."
 }
+```
 
 5. Seguir outro usuario
-Vá para:
-Envie um JSON via POST no formato:
+- Vá para:
+- Envie um JSON via POST no formato:
+```
 {
     "following_user": "user_id"
 }
+```
 
 6. Ver o feed geral (10 tweets, exceto os seus)
-Vá para:
-Envie um GET sem parametros
+- Vá para:
+- Envie um GET sem parametros
 
 7. Ver o feed personalizado (10 tweets, somente de quem você segue)
-Vá para:
-Envie um GET sem parametros
+- Vá para:
+- Envie um GET sem parametros
