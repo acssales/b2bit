@@ -1,5 +1,7 @@
 # Mini Twitter (Back-End)
 
+Por Augusto Cezar Souza Sales (augustcezar@gmail.com)
+
 Este sistema foi desenvolvido como parte do desafio do processo seletivo para a B2BIT.
 
 ## Descrição geral
@@ -43,16 +45,18 @@ CASO 5: Feed personalizado
     Este caso de uso é semelhante a uma funcionalidade de feed de pessoas que você segue.
 
 ### Requisitos extras
-* [ ] Deploy
+
 * [ ] Diagrama entidade relacional do banco de dados utilizado no projeto
 * [ ] Testes automatizados
-* [ ] Deploy do projeto (colocar em produção)
+* [X] Deploy do projeto (colocar em produção) [^2]
 * [ ] Upload de arquivos estáticos
 * [ ] Servir arquivos estáticos. Preferencialmente por uma CDN. Indicamos o AWS S3
 * [x] Utilizar banco de dados PostgreSQL [^1]
 
 ### Itens Bonus (não solicitados)
+
 * [X] Logout
+* [X] Acesso via ferramenta externa (Postman)
 * [X] Controle de prazo (semelhante a SCRUM). Ver em: https://docs.google.com/spreadsheets/d/1ZX-whGO1GHcfIXg0e_f0SX-F4tacGiGRgmj4L2YbIGI/edit?usp=sharing
 
 ## Tabela de versões dos recursos utilizados
@@ -70,3 +74,53 @@ CASO 5: Feed personalizado
 |django-heroku                | 0.3.1                      |
 
 [^1]: Foi utilizado também o sqlite3 durante parte do desenvolvimento, antes da mudança para um psql local e finalmente, o psql utilizado no deploy.
+[^2]: Utilizei o Heroku pois minha conta na AWS está inativa. No entanto, sei utilizar a EC2 também.
+
+# Forma de utilização
+
+1. Criação de usuário
+Vá para: https://b2bit.herokuapp.com/api/register/
+Envie um JSON via POST no formato:
+{
+    "nickname": "Seu Nome",
+    "atname": "@seu_nome",
+    "bio": "Sua descrição",
+    "email": "seu_email@provedor.com",
+    "password": "sua senha"
+}
+
+2. Login
+Vá para: https://b2bit.herokuapp.com/api/login/
+Envie um JSON via POST no formato:
+{
+    "atname": "@seu_nome",
+    "password": "sua senha"
+}
+
+3. Ver seu perfil
+Vá para: https://b2bit.herokuapp.com/api/user/
+Envie um GET sem parametros
+
+3. Logout
+
+4. Tuitar
+Vá para:
+Envie um JSON via POST no formato:
+{
+    "tweet_text": "texto do seu tweet."
+}
+
+5. Seguir outro usuario
+Vá para:
+Envie um JSON via POST no formato:
+{
+    "following_user": "user_id"
+}
+
+6. Ver o feed geral (10 tweets, exceto os seus)
+Vá para:
+Envie um GET sem parametros
+
+7. Ver o feed personalizado (10 tweets, somente de quem você segue)
+Vá para:
+Envie um GET sem parametros
