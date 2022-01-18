@@ -67,5 +67,6 @@ CASO 5: Feed personalizado
 |Conexão Postgres             | psycopg2-binary-2.9.3      |
 |postman (para testes)        | (v9/stable) 9.8.3          |
 |python-decouple (para deploy)| 3.5                        |
+|django-heroku                | 0.3.1                      |
 
 [^1]: Foi utilizado também o sqlite3 durante parte do desenvolvimento, antes da mudança para um psql local e finalmente, o psql utilizado no deploy.
