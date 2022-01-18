@@ -49,7 +49,7 @@ CASO 5: Feed personalizado
 * [ ] Deploy do projeto (colocar em produção)
 * [ ] Upload de arquivos estáticos
 * [ ] Servir arquivos estáticos. Preferencialmente por uma CDN. Indicamos o AWS S3
-* [x] Utilizar banco de dados PostgreSQL[^1]
+* [x] Utilizar banco de dados PostgreSQL [^1]
 
 ### Itens Bonus (não solicitados)
 * [X] Logout
@@ -57,14 +57,15 @@ CASO 5: Feed personalizado
 
 ## Tabela de versões dos recursos utilizados
 
-|       Recurso        |           Versão           |
-|----------------------|----------------------------|
-|Python                | 3.8.10                     |
-|Django                | 4.0.1                      |
-|Django REST framework | 3.13.1                     |
-|Tokens(JWT)           | pyJWT-2.3.0                |
-|CORS                  | django-cors-headers-3.11.0 |
-|Conexão Postgres      | psycopg2-binary-2.9.3      |
-|postman (para testes) | (v9/stable) 9.8.3          |
+|          Recurso            |           Versão           |
+|-----------------------------|----------------------------|
+|Python                       | 3.8.10                     |
+|Django                       | 4.0.1                      |
+|Django REST framework        | 3.13.1                     |
+|Tokens(JWT)                  | pyJWT-2.3.0                |
+|CORS                         | django-cors-headers-3.11.0 |
+|Conexão Postgres             | psycopg2-binary-2.9.3      |
+|postman (para testes)        | (v9/stable) 9.8.3          |
+|python-decouple (para deploy)| 3.5                        |
 
-[^1] Foi utilizado também o sqlite3 durante parte do desenvolvimento, antes da mudança para um psql local e finalmente, o psql utilizado no deploy.
+[^1]: Foi utilizado também o sqlite3 durante parte do desenvolvimento, antes da mudança para um psql local e finalmente, o psql utilizado no deploy.
