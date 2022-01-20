@@ -46,7 +46,7 @@ Este caso de uso é semelhante a uma funcionalidade de feed de pessoas que você
 
 ### Requisitos extras
 
-* [ ] Diagrama entidade relacional do banco de dados utilizado no projeto
+* [X] [Diagrama entidade relacional do banco de dados utilizado no projeto](https://docs.google.com/presentation/d/1WthATn_EMy82UA0Z4Jg6vWw-Hy_9jvTyzAn-A_ILxf4/edit?usp=sharing) [^3]
 * [ ] Testes automatizados
 * [X] Deploy do projeto (colocar em produção) [^2]
 * [ ] Upload de arquivos estáticos
@@ -62,6 +62,7 @@ Este caso de uso é semelhante a uma funcionalidade de feed de pessoas que você
 * [X] Senha "encriptada" armazenada via hash
 * [X] Regra de negócio adicional: Um usuário não pode seguir a si mesmo
 * [X] Regra de negócio adicional: Um usuário não pode seguir outro várias vezes (a relação é única a cada momento)
+* [X] Documentação do sistema via README
 
 ## Tabela de versões dos recursos utilizados
 
@@ -79,6 +80,7 @@ Este caso de uso é semelhante a uma funcionalidade de feed de pessoas que você
 
 [^1]: Foi utilizado também o sqlite3 durante parte do desenvolvimento, antes da mudança para um psql local e finalmente, o psql utilizado no deploy.
 [^2]: Utilizei o Heroku pois minha conta na AWS está inativa. No entanto, sei utilizar a EC2 também.
+[^3]: Link de acesso ao diagrama: https://docs.google.com/presentation/d/1WthATn_EMy82UA0Z4Jg6vWw-Hy_9jvTyzAn-A_ILxf4/edit?usp=sharing
 
 # Forma de utilização
 
