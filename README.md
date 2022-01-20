@@ -58,6 +58,10 @@ Este caso de uso é semelhante a uma funcionalidade de feed de pessoas que você
 * [X] Logout
 * [X] Acesso via ferramenta externa (Postman)
 * [X] Controle de prazo (semelhante a SCRUM). Ver em: https://docs.google.com/spreadsheets/d/1ZX-whGO1GHcfIXg0e_f0SX-F4tacGiGRgmj4L2YbIGI/edit?usp=sharing
+* [X] Ver seu perfil (todos os dados exceto a senha)
+* [X] Senha "encriptada" armazenada via hash
+* [X] Regra de negócio adicional: Um usuário não pode seguir a si mesmo
+* [X] Regra de negócio adicional: Um usuário não pode seguir outro várias vezes (a relação é única a cada momento)
 
 ## Tabela de versões dos recursos utilizados
 
@@ -71,7 +75,7 @@ Este caso de uso é semelhante a uma funcionalidade de feed de pessoas que você
 |Conexão Postgres             | psycopg2-binary-2.9.3      |
 |postman (para testes)        | (v9/stable) 9.8.3          |
 |python-decouple (para deploy)| 3.5                        |
-|django-heroku                | 0.3.1                      |
+|django-heroku (para deploy)  | 0.3.1                      |
 
 [^1]: Foi utilizado também o sqlite3 durante parte do desenvolvimento, antes da mudança para um psql local e finalmente, o psql utilizado no deploy.
 [^2]: Utilizei o Heroku pois minha conta na AWS está inativa. No entanto, sei utilizar a EC2 também.
@@ -90,6 +94,7 @@ Este caso de uso é semelhante a uma funcionalidade de feed de pessoas que você
     "password": "sua senha"
 }
 ```
+-------------------
 
 2. Login
 - Vá para: https://b2bit.herokuapp.com/api/login/
@@ -100,24 +105,37 @@ Este caso de uso é semelhante a uma funcionalidade de feed de pessoas que você
     "password": "sua senha"
 }
 ```
+-------------------
 
 3. Ver seu perfil
 - Vá para: https://b2bit.herokuapp.com/api/user/
 - Envie um GET sem parametros
 
-3. Logout
+-------------------
 
-4. Tuitar
-- Vá para:
+4. Logout
+- Vá para: https://b2bit.herokuapp.com/api/logout/
+- Envie um POST sem parâmetros
+
+-------------------
+
+5. Tuitar
+- Vá para: https://b2bit.herokuapp.com/api/user/tweet/
 - Envie um JSON via POST no formato:
 ```
 {
     "tweet_text": "texto do seu tweet."
 }
 ```
+5.1. Ver todos os tweets
+- Vá para: https://b2bit.herokuapp.com/api/user/tweet/
+- Envie um GET sem parametros
+- Esta função foi deixada intencionalmente para facilitar os testes de uso
 
-5. Seguir outro usuario
-- Vá para:
+-------------------
+
+6. Seguir outro usuario
+- Vá para: https://b2bit.herokuapp.com/api/user/follow/
 - Envie um JSON via POST no formato:
 ```
 {
@@ -125,10 +143,14 @@ Este caso de uso é semelhante a uma funcionalidade de feed de pessoas que você
 }
 ```
 
-6. Ver o feed geral (10 tweets, exceto os seus)
-- Vá para:
+-------------------
+
+7. Ver o feed geral (10 tweets, exceto os seus)
+- Vá para: https://b2bit.herokuapp.com/api/user/feed_geral/
 - Envie um GET sem parametros
 
-7. Ver o feed personalizado (10 tweets, somente de quem você segue)
-- Vá para:
+-------------------
+
+8. Ver o feed personalizado (10 tweets, somente de quem você segue)
+- Vá para: https://b2bit.herokuapp.com/api/user/feed_selecionado/
 - Envie um GET sem parametros
